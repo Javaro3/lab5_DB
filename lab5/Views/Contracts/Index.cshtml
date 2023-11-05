@@ -1,0 +1,71 @@
+﻿@model IEnumerable<lab5.Models.Contract>
+
+@{
+    ViewData["Title"] = "Contracts";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Contracts</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Responsibilities)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StartDeadline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EndDeadline)
+            </th>
+            <th></th>
+        </tr>
+        <tr>
+            <form method="post">
+                <th>
+                <input type="text" name="Responsibilities" value='@ViewData["ContractResponsibilities"]' />
+                </th>
+                <th>
+                <input type="date" name="StartDeadline" value='@ViewData["ContractStartDeadline"]' />
+                </th>
+            <th>
+                <input type="date" name="EndDeadline" value='@ViewData["ContractEndDeadline"]' />
+            </th>
+                <th><input type="submit" class="btn btn-primary" value="Confirm" /></th>
+            </form>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Responsibilities)
+            </td>
+            <td>
+                @item.StartDeadline.ToShortDateString()
+            </td>
+            <td>
+                @item.EndDeadline.ToShortDateString()
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div class="text-center">
+    @if ((int)ViewData["Page"] > 1) {
+        @Html.ActionLink("Предыдущая страница", "Index", new { page = (int)ViewData["Page"] - 1, pageSize = (int)ViewData["PageSize"] })
+    }
+
+    @if ((int)ViewData["Page"] < (int)ViewData["ItemsCount"] / (int)ViewData["PageSize"]) {
+        @Html.ActionLink("Следующая страница", "Index", new { page = (int)ViewData["Page"] + 1, pageSize = (int)ViewData["PageSize"] })
+    }
+</div>

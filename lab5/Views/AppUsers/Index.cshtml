@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<(IdentityUser User, string Role)>
+
+@{
+    ViewData["Title"] = "Users Manager";
+}
+
+<h1>View Roles</h1>
+
+<p>
+    <a asp-action="Create">Create User</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User.Email)
+            </th>
+            <th>
+                Role
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <th>
+                    @Html.DisplayFor(modelItem => item.User.Id)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.User.Email)
+                </th>
+                <th>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </th>
+                <th>
+                    <a asp-action="Edit" asp-route-id="@item.User.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.User.Id">Delete</a>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>

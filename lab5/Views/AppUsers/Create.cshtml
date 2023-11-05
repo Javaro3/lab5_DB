@@ -1,0 +1,32 @@
+﻿@using Microsoft.AspNetCore.Identity
+@{
+    ViewData["Title"] = "Add User";
+    
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="registerForm" method="post">
+            <h2>Create a new account.</h2>
+            <hr />
+            <div class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input name="email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                <label>Email</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input name="password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <label>Password</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <select name="role" asp-items='@(IEnumerable<SelectListItem>)ViewData["RoleList"]' class="form-select" aria-required="true">
+                    <option disabled selected>Select Role</option>
+                </select>
+            </div>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Add</button>
+        </form>
+    </div>
+</div>
